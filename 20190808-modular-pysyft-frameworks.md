@@ -12,7 +12,7 @@
 Make PySyft framework-agnostic (PyTorch, TensorFlow etc.), supporting a more modular and extensible design
 Identify the core PySyft API, with the eventual goal of offering stability guarantees
 Move framework-specific code to a “framework interface” repository (e.g. PySyft-PyTorch, PySyft-Tensorflow etc.)
-Be able to pip install PySyft with a specific framework or several (e.g. pip install syft[“torch”], pip install syft[“tensorflow”], pip install syft[“all”] etc.)
+Be able to pip install PySyft with a specific framework or several (e.g. `pip install syft[“torch”]`, `pip install syft[“tensorflow”]`, `pip install syft[“all”]`, etc.)
 
 ## Motivation
 
