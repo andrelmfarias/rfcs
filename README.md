@@ -1,9 +1,26 @@
-# OpenMined Request for Comments (OM-RFC)
+# OpenMined Request for Comments
+
+A place to make request for contributions.
 
 The purpose of an OpenMined RFC is to engage the OpenMined community in
 development, by getting feedback from stakeholders and experts, and
 communicating design changes broadly. This repository is heavily influenced
 by the [Tensorflow RFC process](https://github.com/tensorflow/community).
+
+## What is a RFC?
+
+RFC stands for Request For Comments.
+
+RFCs are a way to describe a design change facilitating interaction and discussion.
+
+Before submitting an RFC, it is a good idea to discuss your aims with project
+contributors at the #team-pysyft [Slack channel](http://slack.openmined.org/).
+
+## RFC Template
+
+Use the template [from
+GitHub](https://github.com/OpenMined/rfcs/blob/master/yyyymmdd-rfc-template.md),
+being sure to follow the naming conventions described above.
 
 ## Who is involved?
 
@@ -153,9 +170,3 @@ rather than later, stages.
 An approved RFC is no guarantee of a commitment to implement, and acceptance of
 a proposed RFC implementation is still subject to the usual code review
 process.
-
-## RFC Template
-
-Use the template [from
-GitHub](https://github.com/OpenMined/rfcs/blob/master/yyyymmdd-rfc-template.md),
-being sure to follow the naming conventions described above.
