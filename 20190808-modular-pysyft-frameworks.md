@@ -45,7 +45,7 @@ We plan on packaging these repositories in a way that is simplified for users ab
 
 This is not a true circular dependency, since pip knows to skip previously installed dependencies. Parts of the syft codebase that require knowing about framework interfaces will be handed with dependency checks to avoid import errors. Special care will be taken to avoid circular imports, which may require some light refactoring of the directory structure.
 
-By default, pip install syft will install the pytorch + tfe version to maintain compatibility with the Udacity course.
+By default, `pip install syft` will install the pytorch + tfe version to maintain compatibility with the Udacity course.
 
 ## Detailed Design
 
