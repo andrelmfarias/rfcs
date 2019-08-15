@@ -1,10 +1,10 @@
 # Modular PySyft Frameworks
 
-| Status        | Proposed        |
+| Status        | Approved        |
 :-------------- |:---------------------------------------------------- |
 | **Author(s)** | Jason Mancuso (jason@dropoutlabs.com), Yann Dupis (yann@dropoutlabs.com) |
 | **Sponsor**   | Bobby Wagner (bobby@openmined.org)                  |
-| **Updated**   | 2019-08-08                                           |               
+| **Updated**   | 2019-08-15                                           |               
 
 
 ## Objective
