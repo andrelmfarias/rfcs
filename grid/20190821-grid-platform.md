@@ -7,14 +7,14 @@
 | **Updated**   | 2019-08-21                                           |
 
 ## Objective
- - Create secure and collaborative federated learning platform.
+ - Create a secure and collaborative federated learning platform.
  - Train,share and manage models/datasets in a distributed, collaborative and secure way.
  - Understand grid platform concept and discuss about strategies to implement it.
 
 
 ## Motivation
 
-Grid platform aim's to be a secure peer to peer platform used to train, manage and share models. We want to use pysyft's features to perform federated machine learning processes without neeed to manage distributed workers directly. Nowadays, to perform some machine learning process using syft library, the user needs to manage directly all the workers stuff (start nodes, manage node connections, turn off nodes, etc). Our purpose is build a platform that will do this in a transparent way. The user won't need to know about how the nodes are connected or what node have some specific dataset.
+Grid platform aim's to be a secure peer to peer platform used to train, manage and share models. We want to use pysyft's features to perform federated  learning processes without neeed to manage distributed workers directly. Nowadays, to perform some machine learning process using syft library, the user needs to manage directly all the workers stuff (start nodes, manage node connections, turn off nodes, etc). Our purpose is build a platform that will do this in a transparent way. The user won't need to know about how the nodes are connected or what node have some specific dataset.
 
 
 ## User Benefit
@@ -40,7 +40,7 @@ The Grid node works like a standard remote worker used in syft, we added a rest 
 #### Advantages
 - Lower complexity.
 - Easy scalability ( to add new nodes, we only need to update the list of know nodes on grid gateway component ).
-- The network won't be overheadead with control messages.
+- The network won't be overheadead by control messages.
 - Connections between grid nodes can be made by demand (They don't need to maintain several thread processes to maintain all connections in a keep-alive status).
 - User authentication at node level.
 
@@ -62,7 +62,8 @@ In this purpose, we'll use an approach similar to distributed hash table concept
  
 ##### Disadvantages
 - High complexity.
-- Less scalability (to add new nodes, we will need to propagate this on the network).
+- The network can be overheadead by control messages. (update/join/remove messages propagated on the network)
+- Less scalability (to add/remove nodes, we will need to propagate this on the network).
 
 ## Detailed Design
 
