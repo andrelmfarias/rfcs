@@ -53,9 +53,6 @@ In this purpose, we'll use an approach similar to distributed hash table concept
 <br>We will have only grid nodes components, but now, every node on the grid network will act like gateway component too.
 ![Grid Fully Distributed](./images/DHT-grid.png)
 
-#### Grid Node
-The Grid node works like a standard remote worker used in syft, but we added a rest api to make simple queries (used by gateway) without need to maintain a websocket connection.
-
 ##### Advantages
 - Homogeneous architecture.
 - Fully distributed and descentralized.
@@ -78,8 +75,8 @@ To do this, after some node starts it needs to perform a request to grid gateway
 **Data constraints**:  
 ```json
 {
-    "node-id": "Bob", # Unique
-    "node-address": "http://bobnode.herokuapp.com" # Address of bob node
+    "node-id": "Bob", 
+    "node-address": "http://bobnode.herokuapp.com" 
 }
 ```
 After that,the grid gateway component knows who's bob.  
@@ -94,7 +91,7 @@ If some user wants to know where is a specific tagged data. It needs to perform 
 **Data constraints**:  
 ```json
 {
-    "query": ["#MNIST", "#boston-housing"] # list of tags
+    "query": ["#MNIST", "#boston-housing"]
 }
 ```
 ## Success Response
@@ -105,7 +102,7 @@ If some user wants to know where is a specific tagged data. It needs to perform 
 
 ```json
 {
-    "node-addresses": [ ("Bob", "http://bobnode.herokuapp.com"), ("Alice", "http://alicenode.herokuapp.com") ] # List of tuples (id, address)
+    "node-addresses": [ ["Bob", "http://bobnode.herokuapp.com"], ["Alice", "http://alicenode.herokuapp.com"] ]
 }
 ```
 After that, the client needs to connect directly to each grid node to perform some computation.  
