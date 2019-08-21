@@ -66,7 +66,7 @@ In this purpose, we'll use an approach similar to distributed hash table concept
 
 ## Detailed Design
 
-##### How to join in the network?
+### How to join in the network?
 To do this, after some node starts it needs to perform a request to grid gateway.
 <br>The API used to do that:  
 **URL** : `/join`  
@@ -82,7 +82,7 @@ To do this, after some node starts it needs to perform a request to grid gateway
 After that,the grid gateway component knows who's bob.  
 **Development status** : DONE
 
-##### How to search specific dataset on the grid network?
+### How to search specific dataset on the grid network?
 If some user wants to know where is a specific tagged data. It needs to perform a request to grid gateway. After that, the grid gateway will broadcast a search request on the registered nodes and returns a list of node adresses that have the desired dataset.
 <br>The API used to do that:  
 **URL** : `/search`  
@@ -94,7 +94,7 @@ If some user wants to know where is a specific tagged data. It needs to perform 
     "query": ["#MNIST", "#boston-housing"]
 }
 ```
-## Success Response
+##### Success Response
 
 **Code** : `200 OK`
 
@@ -108,7 +108,7 @@ If some user wants to know where is a specific tagged data. It needs to perform 
 After that, the client needs to connect directly to each grid node to perform some computation.  
 **Development status**: DONE
 
-##### How to maintain grid network updated?
+### How to maintain grid network updated?
 The grid gateway need to constantly send health check requests to verify if nodes are alive. To do that, we will need to send simple pings to every know nodes.
 <br>The API used to do that:  
 **URL** : `/health-check`  
