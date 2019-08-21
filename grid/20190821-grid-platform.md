@@ -71,7 +71,7 @@ To do this, after some node starts it needs to perform a request to grid gateway
 <br>The API used to do that:  
 **URL** : `/join`  
 **Method** : `POST`  
-**Auth required** : NO (can be changed)
+**Auth required** : NO (can be changed)  
 **Data constraints**:  
 ```json
 {
