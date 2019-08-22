@@ -21,7 +21,8 @@ Some other benefits:
 
 - gRPC is a highly tuned HTTP/2 protocol so there should be performance benefits to implementing the protocol in it.
 - Not having to hand write the protocol in every language will reduce code duplication between different languages.
-- There has been some interest in standardizing the protocol related to Jason’s work on generalizing the hooking mechanisms in the PySyft, see here.
+
+There has been some interest in standardizing the protocol related to Jason’s work on generalizing the hooking mechanisms in the PySyft, see [here](https://github.com/OpenMined/rfcs/pull/3#issuecomment-519863747).
 
 ## User Benefit
 
@@ -30,14 +31,14 @@ Developers creating new clients to PySyft will benefit from the protocol being s
 ## Design Proposal
 
 Here we propose that we should replace PySyft’s current messaging protocol and framework with something well-defined in gRPC and Protobufs.
-T
-his will be a fairly big change to the PySyft codebase but it shouldn’t have any user impact as these details should be hidden. Developers of projects like Grid and syft.js will be impacted as they rely on the current protocol. The developers will need to update the projects to use the new protocol. It is out of scope of this document, but to ease this process it would help to come up with a migration strategy for dependent projects.
+
+This will be a fairly big change to the PySyft codebase but it shouldn’t have any user impact as these details should be hidden. Developers of projects like Grid and syft.js will be impacted as they rely on the current protocol. The developers will need to update the projects to use the new protocol. It is out of scope of this document, but to ease this process it would help to come up with a migration strategy for dependent projects.
 
 There are three major changes that will need to take place:
 
-1. All of the messages defined by syft/codes.py will need an analogous RPC call in gRPC. The structure of each message will need to be strictly defined for each RPC call.
+1. All of the messages defined by [syft/codes.py](https://github.com/OpenMined/PySyft/blob/dev/syft/codes.py#L1) will need an analogous RPC call in gRPC. The structure of each message will need to be strictly defined for each RPC call.
 
-2. The recent messaging abstraction will be replaced by the Protobuf definition. We should be able to use this abstraction to help define what the messages being sent by the RPC calls actually look like.
+2. The recent [messaging abstraction](https://github.com/OpenMined/PySyft/blob/dev/syft/messaging/message.py) will be replaced by the Protobuf definition. We should be able to use this abstraction to help define what the messages being sent by the RPC calls actually look like.
 
 3. One of the biggest changes will be around how the Worker abstraction works. Currently if you’re creating new Workers you only need to override `_send_msg` and `_recv_msg`. With the introduction of gRPC/Protobufs the sending/receiving is hidden and taken care of automatically with gRPC so its not immediately clear if it’s worth having these two bottleneck functions at the PySyft level (it might not even be possible). With gRPC we’ll need to create a series of send and receive functions that must be overridden by subclasses. Each RPC defined by the Protobuf file would require its own send and receive function that would then need to be overridden by the subclass.
 
@@ -61,7 +62,7 @@ Currently PySyft is using a hand-written binary protocol where the data is seria
 
 #### Capn Proto
 
-Capn Proto is quite similar to gRPC and protobufs. It provides strongly typed data interchange format and servers that can exchange this data. It seems like a very strong contender to gRPC and protobufs but there are a couple downsides mainly related to how gRPC has much more widespread use.
+[Capn Proto](https://capnproto.org/) is quite similar to gRPC and protobufs. It provides strongly typed data interchange format and servers that can exchange this data. It seems like a very strong contender to gRPC and protobufs but there are a couple downsides mainly related to how gRPC has much more widespread use.
 
 First, while it might have some security scrutiny it does not have as much scrutiny as gRPC/protobufs would have. Secondly, both PyTorch and TensorFlow have relations with gRPC/Protobufs so it might be helpful to continue to use gRPC just in case this becomes important in the future.
 
@@ -159,7 +160,7 @@ message Status {
 
 - Can we give all the objects passed over the network strong types?
 - Are there any improvements that can be made to the current messages? Can we remove or add any messages to make the interface better while we have the chance?
-- What other abstractions could be affected by these changes? Is there something we’re missing related to Plans?
+- What other abstractions could be affected by these changes? Is there something we’re missing related to [Plans](https://github.com/OpenMined/PySyft/blob/dev/syft/messaging/plan.py)?
 
 ## Appendix
 
