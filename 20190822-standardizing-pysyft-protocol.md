@@ -1,7 +1,7 @@
 # Standardizing PySyft Protocol
 
 
-| Status        | Approved        |
+| Status        | Proposed        |
 :-------------- |:---------------------------------------------------- |
 | **Author(s)** | Justin Patriquin (justin@dropoutlabs.com) |
 | **Sponsor**   | Jason Mancuso  (jason@dropoutlabs.com)                  |
