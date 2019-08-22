@@ -14,7 +14,7 @@
 **When we say efficiency we mean: memory efficiency and time efficiency.**
 
 We need this mainly to:
-- Have garantees about execution time. This is great for developers and users.
+- Have performance garantees. This is great for developers and users.
 - Avoid breaking things. Track operations time.
 - Help debugging. We have a lot of dependencies which can result on efficiency changes, having this will
 help as track and debug efficiency problems.
@@ -45,36 +45,24 @@ Users will have explictly garantees / examples of what performance to expect of 
 
 *TODO*
 
-This is the meat of the document, where you explain your proposal. If you have
-multiple alternatives, be sure to use sub-sections for better separation of the
-idea, and list pros/cons to each approach. If there are alternatives that you
-have eliminated, you should also list those here, and explain why you believe
-your chosen approach is superior.
+We propose two types of tests:
 
-Factors to consider include:
+### Unit tests
 
-* performance implications
-* dependencies
-* maintenance
-* platforms and environments impacted (e.g. hardware, cloud, other software
-  ecosystems)
-* compatibility
-* user impact (how will this change impact users, and how will that be managed?)
-* codebase impact (will this require a lot of changes in the codebase or change how something operates?)
-* alternative solutions (divide this into sections)
-* concerns (challenges? deadlines? dependencies?)
+Regular unit tests that are executed with every new commit.
 
-If convenient add images, diagrams, code snippets.
+#### Checking memory use and time for running basic operations with MPC
 
+Operations that should be tested:
 
-## Related resources
+  * matmul
+  * division
+  * exp
+  * add
 
-*TODO*
+We should test that every operations takes less than `X` seconds and that it uses less than `Y` memory.
 
-Link any relevant resources related to this RFC. Example: issues, PRs, blog posts, ...
+### Benchmarks
 
-## Questions and Discussion Topics
-
-*TODO*
-
-Seed this with open questions you require feedback on from the RFC process.
+Have concrete benchmarks similar to real use cases. These tests may take a long time to run so they should just be executed
+by demand and/or before a new version is released.
