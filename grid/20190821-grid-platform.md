@@ -3,7 +3,7 @@
 | Status        | (Proposed)       |
 :-------------- |:---------------------------------------------------- |
 | **Author(s)** | Ionesio Junior (ionesiojr@gmail.com)                 |
-| **Sponsor**   | Ionesio Junior (ionesiojr@gmail.com)                 |
+| **Sponsor**   | Marianne Linhares (mariannelinharesm@gmail.com)      |
 | **Updated**   | 2019-08-21                                           |
 
 ## Objective
