@@ -3,7 +3,7 @@
 | Status        | Proposed                                             |
 :-------------- |:---------------------------------------------------- |
 | **Author(s)** | Marianne Monteiro, Andre Farias                      |
-| **Sponsor**   | Marianne Monteiro                                    |
+| **Sponsor**   | ?                                                    |
 | **Updated**   | 2019-08-21                                           |
 
 ## Objective
