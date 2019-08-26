@@ -25,11 +25,11 @@ We will have a distributed and collaborative platform to share datasets and perf
 
 ### Partially Distributed
 This is our simpliest design. We will have a two types of components (Grid Gateway and  Grid Node).
-![Grid Partially Distributed](./images/partially_grid.png)
+![Grid Partially Distributed](./grid/partially_grid.png)
 
 #### Grid Gateway
 Grid Gateway works like a special DNS component (but it will route nodes by queries instead of domain names).  
-To do that, it needs to know the node's adress and id of all grid nodes connected on our grid network.
+To do that, it needs to know the node's address and id of all grid nodes connected on our grid network.
 If someone wants to perform any computation/query on our grid network, the grid gateway will be the first component to be asked.
 
 #### Grid Node
@@ -51,7 +51,7 @@ The Grid node works like a standard remote worker used in syft, we added a rest 
 ### Fully Distributed
 In this purpose, we'll use an approach similar to distributed hash table concept to map every node on our grid network using their ids.
 <br>We will have only grid nodes components, but now, every node on the grid network will act like gateway component too.
-![Grid Fully Distributed](./images/DHT-grid.png)
+![Grid Fully Distributed](./grid/DHT-grid.png)
 
 ##### Advantages
 - Homogeneous architecture.
@@ -59,7 +59,7 @@ In this purpose, we'll use an approach similar to distributed hash table concept
 - User authentication at node level.
 - Fault tolerant (if some node crashes, we still have the network).
 - Connections between grid nodes can be made by demand (They don't need to maintain several thread processes to maintain all connections in a keep-alive status).
- 
+
 ##### Disadvantages
 - High complexity.
 - The network can be overheadead by control messages. (update/join/remove messages propagated on the network)
@@ -76,8 +76,8 @@ To do this, after some node starts it needs to perform a request to grid gateway
 **Data constraints**:  
 ```json
 {
-    "node-id": "Bob", 
-    "node-address": "http://bobnode.herokuapp.com" 
+    "node-id": "Bob",
+    "node-address": "http://bobnode.herokuapp.com"
 }
 ```
 After that,the grid gateway component knows who's bob.  
