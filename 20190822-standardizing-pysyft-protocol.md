@@ -5,7 +5,7 @@
 :-------------- |:---------------------------------------------------- |
 | **Author(s)** | Justin Patriquin (justin@dropoutlabs.com) |
 | **Sponsor**   | Jason Mancuso  (jason@dropoutlabs.com)                  |
-| **Updated**   | 2019-08-22                                           |
+| **Updated**   | 2019-08-27                                           |
 
 ## Objective
 
@@ -19,7 +19,7 @@ Viewing PySyft as a generic platform for encrypted, privacy-preserving deep lear
 
 Some other benefits:
 
-- gRPC is a highly tuned HTTP/2 protocol so there should be performance benefits to implementing the protocol in it.
+- Making it easy to leverage gRPC is quite powerful as it is a highly tuned HTTP/2 protocol which will provide performance benefits
 - Not having to hand write the protocol in every language will reduce code duplication between different languages.
 
 There has been some interest in standardizing the protocol related to Jason’s work on generalizing the hooking mechanisms in the PySyft, see [here](https://github.com/OpenMined/rfcs/pull/3#issuecomment-519863747).
@@ -40,15 +40,17 @@ There are three major changes that will need to take place:
 
 2. The recent [messaging abstraction](https://github.com/OpenMined/PySyft/blob/dev/syft/messaging/message.py) will be replaced by the Protobuf definition. We should be able to use this abstraction to help define what the messages being sent by the RPC calls actually look like.
 
-3. One of the biggest changes will be around how the Worker abstraction works. Currently if you’re creating new Workers you only need to override `_send_msg` and `_recv_msg`. With the introduction of gRPC/Protobufs the sending/receiving is hidden and taken care of automatically with gRPC so its not immediately clear if it’s worth having these two bottleneck functions at the PySyft level (it might not even be possible). With gRPC we’ll need to create a series of send and receive functions that must be overridden by subclasses. Each RPC defined by the Protobuf file would require its own send and receive function that would then need to be overridden by the subclass.
+3. One of the biggest changes will be around how the Worker abstraction works. Currently if you’re creating new Workers you only need to override `_send_msg` and `_recv_msg`. With a gRPC-based design we’ll need to create a series of send and receive functions that must be overridden by subclasses. Each RPC defined by the Protobuf file would require its own send and receive function that would then need to be overridden by the subclass. See the [example](#) below.
 
-One thing to consider is that although we’re leaning heavily on gRPC it is still possible to remove it as a dependency. For example, if you wanted to use a different transport mechanism (e.g. Websockets, hand-written UDP protocol) you can just serialize the Protobuf messages directly and send those using whatever mechanism you’ve chosen.
+One thing to consider is that although we’re leaning heavily on gRPC (to define the RPC protocol) we won't want to make it a required dependency for PySyft. For example, if you wanted to use a different transport mechanism (e.g. Websockets, hand-written UDP protocol) you can just serialize the Protobuf messages directly and send those using whatever mechanism you’ve chosen while still sticking with the protocol defined in gRPC/Protobuf. See this section of the Protobuf documentation where it suggests you can even build your own RPC framework on top of Protobufs: https://developers.google.com/protocol-buffers/docs/proto#services.
+
+gRPC can come in play in the future implementation of this in the form of a `gRPCWorker`. Once we have the messages and RPC protocol in place this worker should be fairly easy to add and will just require some boilerplate code to start servers and clients. Users will be able to choose between this worker, web socket workers or any other workers available.
 
 ### Performance Benefits
 
 With this proposal we should see performance benefits, decreased maintenance costs and decreased costs when trying to implement PySyft across platforms.
 
-Performance benefits comes down to using the types correctly to define the exact objects that are being passed across the wire. Currently, objects are being serialized using msgpack which has the flexibility to turn any object into a binary blob. To begin implementation we might be able to continue to use msgpack but if we can anticipate what the objects we’re passing around are it’d be ideal to give these precise types. This will help us take advantage of all the performance tuning that gRPC/Protobufs has done. gRPC also has optional compression builtin so we can take advantage of that as needed.
+Performance benefits when using the proposed `gRPCWorker` comes down to using the types correctly to define the exact objects that are being passed across the wire. Currently, objects are being serialized using msgpack which has the flexibility to turn any object into a binary blob. To begin implementation we might be able to continue to use msgpack but if we can anticipate what the objects we’re passing around are it’d be ideal to give these precise types. This will help us take advantage of all the performance tuning that gRPC/Protobufs has done. gRPC also has optional compression builtin so we can take advantage of that as needed.
 
 ### Non-goals
 
@@ -70,7 +72,7 @@ First, while it might have some security scrutiny it does not have as much scrut
 
 Here I’m going to give some examples of how the messages might actually look when implemented for the `BaseWorker` and `VirtualWorker` as well as should what a .proto file could start to look like for PySyft.
 
-### Testing with Virtual Worker and Protobufs
+### Devleopment with Virtual Worker and Protobufs
 
 One of PySyft’s most powerful features is the ability to use the Virtual Worker to iterate on features/bug fixes without having the overhead of setting up network connections. With the introduction of gRPC/Protobuf we can continue to do this by ignoring the gRPC side for the most part.
 
