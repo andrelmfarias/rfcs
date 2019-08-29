@@ -43,7 +43,7 @@ Users will have explictly garantees / examples of what performance to expect of 
 
 ## Design Proposal
 
-We propose two types of tests:
+We plan to implement these tests in an iterative fashion. We propose two types of tests:
 
 ### Unit tests
 
