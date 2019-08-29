@@ -1,4 +1,4 @@
-# Title of RFC
+Â# Title of RFC
 
 | Status        | Proposed                                             |
 :-------------- |:---------------------------------------------------- |
@@ -14,10 +14,10 @@
 **When we say efficiency we mean: memory efficiency and time efficiency.**
 
 We need this mainly to:
-- Have performance garantees. This is great for developers and users.
+- Have performance guarantees. This is great for developers and users.
 - Avoid breaking things. Track operations time.
 - Help debugging. We have a lot of dependencies which can result on efficiency changes, having this will
-help as track and debug efficiency problems.
+help us track and debug efficiency problems.
 [We already have relevant issues open related to efficiency problems](https://github.com/OpenMined/PySyft/issues?q=is%3Aopen+is%3Aissue+label%3Aefficiency)
 
 ### Criteria
@@ -43,7 +43,7 @@ Users will have explictly garantees / examples of what performance to expect of 
 
 ## Design Proposal
 
-We plan to implement these tests in an iterative fashion. We propose two types of tests:
+We plan to implement these tests in an iterative fashion. These tests would be placed in a separated sub-repository `efficiency-tests` inside `test` repository and organized by type of test. We propose two main types of tests:
 
 ### Unit tests
 
@@ -57,6 +57,8 @@ Operations that should be tested:
   * division
   * exp
   * add
+  * sigmoid
+  * tanh
 
 We should test that every operations takes less than `X` seconds and that it uses less than `Y` memory.
 
