@@ -43,8 +43,6 @@ Users will have explictly garantees / examples of what performance to expect of 
 
 ## Design Proposal
 
-*TODO*
-
 We propose two types of tests:
 
 ### Unit tests
@@ -66,3 +64,5 @@ We should test that every operations takes less than `X` seconds and that it use
 
 Have concrete benchmarks similar to real use cases. These tests may take a long time to run so they should just be executed
 by demand and/or before a new version is released.
+
+Perhaps we could implement a BenchmarkWorker, a simple extension of VirtualWorker which runs time.sleep() for each message based on either a fixed waiting amount (simulating ping / latency), the size of the message (serialization) or the size of the recent cache of messages (bandwidth).
